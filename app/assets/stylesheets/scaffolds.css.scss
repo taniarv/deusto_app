@@ -1,5 +1,5 @@
 body {
-  background-color: #fff;
+  background-color: #E6F1F6;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -54,3 +54,19 @@ div {
   ul li {
     font-size: 12px;
     list-style: square; } }
+
+div.body {
+  border: solid 1px #29AEE6;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  padding: 1em;
+}
+
+div.main_content {
+  margin: 2em;
+}
+
+div#user_nav {
+  float:right;
+}
+
