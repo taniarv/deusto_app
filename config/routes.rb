@@ -1,4 +1,6 @@
 DeustoApp::Application.routes.draw do
+  resources :tweets
+
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
   get "signup" => "users#new"
@@ -6,7 +8,7 @@ DeustoApp::Application.routes.draw do
   resources :users
   resources :sessions 
   
-  root :to => "users#new"
+  root :to => "tweets#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

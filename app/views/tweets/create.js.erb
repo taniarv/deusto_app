@@ -1,0 +1,10 @@
+$('#timeline').prepend("<%= escape_javascript(render 'tweet', :tweet => @tweet) %>");
+$('#tweet_content').attr('value', '');
+
+$('#tweet_<%= @tweet.id %>').addClass('highlight');
+
+$('#tweet_<%= @tweet.id %>').bind('hover', function(){
+  $(this).removeClass('highlight');
+})
+
+

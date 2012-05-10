@@ -18,5 +18,12 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal "Invalid email or password", flash[:alert]
     assert_nil(session[:user_id])
   end
+  
+  test "should not login non existent user" do
+    post :create, :email => 'new@email.com', :password => '123456'
+    assert_template "new"
+    assert_equal "Invalid email or password", flash[:alert]
+    assert_nil(session[:user_id])
+  end  
 
 end

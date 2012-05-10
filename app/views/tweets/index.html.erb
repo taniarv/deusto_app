@@ -1,0 +1,9 @@
+<h1>Your timeline</h1>
+
+<%= render :partial => '/tweets/form' %>
+
+<div id='timeline'>
+  <% @tweets.each_with_index do |tweet, i| %>
+    <%= render 'tweet', :i => i, :tweet => tweet %>
+  <% end %>
+</div>

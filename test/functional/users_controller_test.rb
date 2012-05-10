@@ -23,6 +23,13 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to user_path(assigns(:user))
   end
+  
+  test "should not create invalid user" do
+    assert_no_difference('User.count') do
+      post :create, :user => {:name => 'Alice', :email => 'invalid', :password => '123456', :password_confirmation => '123456'}
+    end
+    assert_template 'users/new'
+  end  
 
   test "should show user" do
     get :show, id: @user
