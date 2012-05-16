@@ -7,5 +7,15 @@ one:
 
 two:
   name: User two
-  email: two@email.com	
+  email: two@email.com
+  password: 123456  
+  
+homer:
+  name: Homer
+  email: homer@email.com
+  password: 123456
+
+moe:
+  name: Moe Szyslak
+  email: moe@email.com	
   password: 123456

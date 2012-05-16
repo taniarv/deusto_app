@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require 'test_helper'
+require File.dirname(File.expand_path(__FILE__)) + "/../test_helper"
 
 class UserTest < ActiveSupport::TestCase
 def setup
@@ -38,4 +38,34 @@ def setup
     assert user2.errors[:email].include?("has already been taken")
   end
 
+  test "should respond to followings" do
+    user = users(:homer)
+    assert_equal [users(:moe)], user.followings
+  end
+  
+  test "should respond to follows?" do
+    user = users(:homer)
+    
+    assert user.follows?(users(:moe))
+  end
+
+  test "should follow" do
+    user = users(:homer)
+
+    assert_difference("Relationship.count", 1) do
+      user.follow!(users(:moe))
+    end
+
+    assert user.followings.include?(users(:moe))
+  end
+
+  test "should unfollow" do
+    user = users(:homer)
+
+    assert_difference("Relationship.count", -1) do
+      user.unfollow!(users(:moe))
+    end
+
+    assert user.followings.empty? 
+  end
 end
