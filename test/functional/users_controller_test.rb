@@ -1,14 +1,24 @@
-require 'test_helper'
+require File.dirname(File.expand_path(__FILE__)) + "/../test_helper"
 
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
   end
 
-  test "should get index" do
+  test "logged in user should see users list" do
+    login_as(:homer)
     get :index
+
     assert_response :success
-    assert_not_nil assigns(:users)
+    assert assigns(:users)
+    assert !assigns(:users).empty? 
+  end
+
+  test "anonymous user should be redirected to login page when getting index" do
+    get :index
+
+    assert_redirected_to login_path
+    assert_equal "You need to be logged in in order to see the users list", flash[:notice]
   end
 
   test "should get new" do
@@ -53,4 +63,5 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+    
 end

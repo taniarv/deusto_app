@@ -10,8 +10,16 @@ class ApplicationController < ActionController::Base
   end
   
   def login_required
+    notice = case controller_name
+            when 'users'
+              "You need to be logged in in order to see the users list"
+            when 'tweets'
+              "You need to be logged in in order to tweet"
+            else
+              "You need to be logged in in order to see this page"
+            end
     unless current_user
-      redirect_to login_path, :notice => 'You need to be logged in in order to tweet'
+      redirect_to login_path, :notice => notice
     end  
   end
 end

@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  # Sólo los usuarios registrados ven la lista de usuarios
+  before_filter :login_required, :only => [:index]
+  
   # GET /users
   # GET /users.json
   def index
