@@ -1,21 +1,21 @@
 class User < ActiveRecord::Base
   has_many :tweets
-
   # El usuario tiene michos "relationships" donde follower_id = self.id
-  has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   # A través de los "relationships" se pueden obtener las personas que el usuario sige
-  has_many :followings, :through => :relationships, :source => :followed
+  has_many :followings, through: :relationships, source: :followed
+
   
-  validates :name, :presence => true
+  validates :name, presence: true
 
   validates :password, 
-            :length => {:mininum => 6, :maximum => 30},
-            :confirmation => true
+            length: {:mininum => 6, :maximum => 30},
+            confirmation: true
 
   validates :email, 
-            :presence => true, 
-            :uniqueness => true, 
-            :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+            presence: true, 
+            uniqueness: true, 
+            format: { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
 
   def self.authenticate(email, password)
     user = find_by_email(email)
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   # Si no se puede crear la relación, sale error.
   # 
   def follow!(followed)
-    relationships.create!(:followed_id => followed.id)
+    relationships.create!(followed_id: followed.id)
   end
 
   #
@@ -49,6 +49,13 @@ class User < ActiveRecord::Base
   #
   def unfollow!(followed)
     relationships.find_by_followed_id(followed).destroy
+  end
+  
+  #
+  # Mensajes de los usuarios que el usuario sigue.
+  #
+  def feed
+    Tweet.from_users_followed_by(self)
   end
   
 end

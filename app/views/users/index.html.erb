@@ -2,6 +2,6 @@
 
 <% @users.each_with_index do |user, i| %>
   <div class="user <%= odd_or_even(i) %>">
-    <span class="name"><%= user.name %></span>
+    <span class="name"><%= link_to user.name, user %></span>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-require File.dirname(File.expand_path(__FILE__)) + "/../test_helper"
+require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do

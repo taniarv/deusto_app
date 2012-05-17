@@ -4,7 +4,7 @@
   <p class="content"><%= tweet.content %></p>
   <div class="user_and_moment">
     <span class="user">
-      <%= t(:by) %> <%= tweet.user.name %>
+      <%= t(:by) %> <%= link_to tweet.user.name, tweet.user %>
     </span>
     <span class="moment">
       <%= distance_of_time_in_words(tweet.created_at, Time.now) %>

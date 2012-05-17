@@ -19,3 +19,8 @@ moe:
   name: Moe Szyslak
   email: moe@email.com	
   password: 123456
+
+krusty:
+  name: Krusty teh Clown
+  email: krusti@email.com	
+  password: 123456

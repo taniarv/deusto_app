@@ -9,9 +9,9 @@ class Relationship < ActiveRecord::Base
   # 
 
   # un follower_id que correspone a un id de usuario
-  belongs_to :follower, :class_name => "User"
+  belongs_to :follower, class_name: "User"
 
   # y un followed_id que también corresponde a un id de usuario.
-  belongs_to :followed, :class_name => "User"
+  belongs_to :followed, class_name: "User"
 
 end

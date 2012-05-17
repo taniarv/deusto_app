@@ -1,20 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<h1><%= @user.name %></h1>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<% unless current_user.eql?(@user) %>
+  <div id="follow_form">
+    <% if current_user.follows?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+      <%= render 'follow' %>
+    <% end %>
+  </div>
+<% end %>
 
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
+<div id='timeline'>
+  <% @user.tweets.each_with_index do |tweet, i| %>
+    <%= render 'tweets/tweet', :i => i, :tweet => tweet %>
+  <% end %>
+</div>
 
+<%= link_to('Edit', edit_user_path(@user)) if current_user && current_user.eql?(@user)%>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

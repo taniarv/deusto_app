@@ -7,6 +7,7 @@ DeustoApp::Application.routes.draw do
   
   resources :users
   resources :sessions 
+  resources :relationships, :only => [:create, :destroy]
   
   root :to => "tweets#index"
   # The priority is based upon order of creation:
