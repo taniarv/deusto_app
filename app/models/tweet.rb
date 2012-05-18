@@ -18,8 +18,11 @@ class Tweet < ActiveRecord::Base
   
     # Condición SQL para coger los tweets que corresponden al usuario user
     def self.followed_by(user)
-      where("user_id IN (:following_ids) OR user_id = :user_id",
-            { following_ids: user.following_ids, user_id: user.id })
+      following_ids = %(SELECT followed_id FROM relationships 
+                               WHERE follower_id = :user_id)
+                                  
+      where("user_id IN (#{following_ids}) OR user_id = :user_id",
+            {user_id: user.id })
     end
   
 end
