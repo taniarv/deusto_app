@@ -26,7 +26,7 @@ class TweetTest < ActiveSupport::TestCase
   
   test "should list tweets in reversed time order by default" do
     tweets = Tweet.all
-    assert tweets[0].created_at > tweets[1].created_at
+    assert tweets[0].created_at >= tweets[1].created_at
   end
   
 end

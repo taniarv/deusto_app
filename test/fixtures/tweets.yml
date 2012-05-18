@@ -9,3 +9,13 @@ user_two_tweet:
   content: I like hamburgers!
   user: two
   created_at: <%= 2.minute.ago %>
+  
+moe_tweet_1:
+  content: The bar is open
+  user: moe
+  created_at: <%= 1.minute.ago %>
+  
+moe_tweet_1:
+  content: I am waiting for you 
+  user: moe
+  created_at: <%= 1.minute.ago %>  

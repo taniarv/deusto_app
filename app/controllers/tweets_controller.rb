@@ -7,7 +7,7 @@ class TweetsController < ApplicationController
     @tweets = if current_user.present? 
       current_user.feed
     else
-      Tweet.all
+      Tweet
     end
     
     @tweets = @tweets.page(params[:page])

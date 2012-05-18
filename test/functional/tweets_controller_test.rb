@@ -41,35 +41,18 @@ class TweetsControllerTest < ActionController::TestCase
     assert_equal "You need to be logged in in order to tweet", flash[:notice]
   end
   
+  test "logged in user sees the tweets of the users she follows" do
+    login_as(:homer)
+    current_user = users(:homer)
+    assert current_user.follows?(users(:moe))
+    assert !current_user.follows?(users(:one))    
     
-  # test "should create tweet" do
-  #   assert_difference('Tweet.count') do
-  #     post :create, tweet: @tweet.attributes
-  #   end
-  # 
-  #   assert_redirected_to tweet_path(assigns(:tweet))
-  # end
-  # 
-  # test "should show tweet" do
-  #   get :show, id: @tweet
-  #   assert_response :success
-  # end
-  # 
-  # test "should get edit" do
-  #   get :edit, id: @tweet
-  #   assert_response :success
-  # end
-  # 
-  # test "should update tweet" do
-  #   put :update, id: @tweet, tweet: @tweet.attributes
-  #   assert_redirected_to tweet_path(assigns(:tweet))
-  # end
-  # 
-  # test "should destroy tweet" do
-  #   assert_difference('Tweet.count', -1) do
-  #     delete :destroy, id: @tweet
-  #   end
-  # 
-  #   assert_redirected_to tweets_path
-  # end
+    get :index
+    assert_response :success
+    assert assigns(:tweets)
+    
+    assert_nil assigns(:tweets).detect {|t| t.user.eql?(users(:one))}
+    assert_not_nil assigns(:tweets).detect {|t| t.user.eql?(users(:moe))}    
+  end
+     
 end

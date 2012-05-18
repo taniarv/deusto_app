@@ -9,6 +9,8 @@ class Tweet < ActiveRecord::Base
             
   default_scope :order => 'created_at DESC'            
   
+  scope :recent, where("created_at > ?", 1.day.ago)
+  
   # Lista de los tweets del usuario user y de todos los usuarios que este sigue
   scope :from_users_followed_by, lambda { |user| followed_by(user) }
 
