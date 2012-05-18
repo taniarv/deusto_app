@@ -7,7 +7,7 @@
       <%= t(:by) %> <%= link_to tweet.user.name, tweet.user %>
     </span>
     <span class="moment">
-      <%= distance_of_time_in_words(tweet.created_at, Time.now) %>
+      <%= t(:ago, :distance => distance_of_time_in_words(tweet.created_at, Time.now)) %>
     </span>
   </div>
 </div>  

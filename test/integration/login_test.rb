@@ -12,6 +12,6 @@ class LoginTest < ActionDispatch::IntegrationTest
     assert_equal "Logged in!", flash[:notice]
     assert_not_nil(session[:user_id])
     
-    assert_select 'div#user_nav', /Hello #{users(:one).name}!/
+    assert_select 'div#user_nav', /Hola #{users(:one).name}!/
   end
 end
